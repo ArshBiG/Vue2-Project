@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-  <div class="main" >
+  <div class="check" >
     <!-- Event Binding Click -->
     <h1>this is a simple Vue app</h1>
     <p>Count: {{ count }}</p>
@@ -55,7 +55,7 @@ export default {
 <style lang="scss" >
 $primary-color: red;
 
-.main {
+.check {
   text-align: center;
   margin-top: 50px;
 

@@ -10,9 +10,9 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="personal">
+        <h1>Personal Info Visibility</h1>
         <div>
-            <h1>Personal Info Visibility</h1>
             <label>Toggle Visibility</label>
             <input type="checkbox" v-model="isLoggedin">
             <h1>Personal Information :</h1>

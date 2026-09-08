@@ -15,10 +15,9 @@ export default {
 
 
 <template>
-    <div>
-        
+    <div class="personal" >
+        <h1>Personal Info Form</h1>
         <div>
-            <h1>Personal Info Form</h1>
             <p>Username :</p>
             <input v-model="username" type="text" placeholder="Enter your username">
             <p>Lastname :</p>
@@ -45,3 +44,21 @@ export default {
 
     </div>
 </template>
+
+<style>
+
+
+
+.personal {
+    text-align: center;
+    margin-top: 50px;
+    background-color: #ececec;
+    padding: 30px;
+    margin: 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+
+</style>
