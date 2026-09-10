@@ -61,7 +61,7 @@ $border: #0e0e0f;
     margin-top: 50px;
     background-color: $primary;
     padding: 30px;
-    margin: 60px;
+    margin: 60px auto ;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 400px;

@@ -1,9 +1,11 @@
 <script>
+
 import MiniProject from './components/miniProject.vue';
 import QueueCounter from './components/QueueCounter.vue';
 import PersonalInfoForm from './components/PersonalInfoForm.vue';
 import PersonalInfoVisibility from './components/PersonalInfoVisibility.vue';
 import RandomColor from './components/randomColor.vue';
+import AgeCalculator from './components/AgeCalculator.vue';
 
 export default {
   components: {
@@ -12,6 +14,7 @@ export default {
     PersonalInfoForm,
     PersonalInfoVisibility,
     RandomColor,
+    AgeCalculator,
   }
 }
 
@@ -49,6 +52,13 @@ export default {
       <h1>Task Random Color Generator</h1>
       <randomColor />
     </div>
+
+    <hr>
+    <div>
+      <h1>Task Age Calculator</h1>
+      <AgeCalculator />
+    </div>
+
 
 
   </div>
