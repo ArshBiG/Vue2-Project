@@ -1,20 +1,24 @@
 <script>
 
-import MiniProject from './components/miniProject.vue';
-import QueueCounter from './components/QueueCounter.vue';
-import PersonalInfoForm from './components/PersonalInfoForm.vue';
-import PersonalInfoVisibility from './components/PersonalInfoVisibility.vue';
-import RandomColor from './components/randomColor.vue';
-import AgeCalculator from './components/AgeCalculator.vue';
+// import MiniProject from './components/miniProject.vue';
+// import QueueCounter from './components/QueueCounter.vue';
+// import PersonalInfoForm from './components/PersonalInfoForm.vue';
+// import PersonalInfoVisibility from './components/PersonalInfoVisibility.vue';
+// import RandomColor from './components/randomColor.vue';
+// import AgeCalculator from './components/AgeCalculator.vue';
+// import InputDemo from './components/InputDemo.vue';
+import InputsDemo from './components/InputsDemo.vue';
 
 export default {
   components: {
-    MiniProject,
-    QueueCounter,
-    PersonalInfoForm,
-    PersonalInfoVisibility,
-    RandomColor,
-    AgeCalculator,
+    // MiniProject,
+    // QueueCounter,
+    // PersonalInfoForm,
+    // PersonalInfoVisibility,
+    // RandomColor,
+    // AgeCalculator,
+    // InputDemo,
+    InputsDemo,
   }
 }
 
@@ -25,7 +29,7 @@ export default {
 <template>
   <div>
 
-    <div>
+    <!-- <div>
       <MiniProject />
     </div>
 
@@ -57,6 +61,16 @@ export default {
     <div>
       <h1>Task Age Calculator</h1>
       <AgeCalculator />
+    </div> -->
+
+    <!-- <div>
+      
+      <h1>Task Input Demo</h1>
+      <InputDemo />
+    </div> -->
+
+    <div>
+      <InputsDemo/>
     </div>
 
 

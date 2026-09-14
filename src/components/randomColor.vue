@@ -2,8 +2,12 @@
 export default {
   data() {
     return {
-      // Save Generated Colors
-      colors: []
+        // Save Generated Colors
+        colors: [],
+
+        // Save Hovered Color
+        hoveredColor: null
+
     }
   },
 
@@ -21,7 +25,16 @@ export default {
     copyColor(color) {
       navigator.clipboard.writeText(color)
       alert(`Copied ${color} to clipboard!`)
-    }
+    },
+
+    showColor(color) {
+        this.hoveredColor = color
+        },
+
+    hideColor() {
+        this.hoveredColor = null
+        }
+
   }
 }
 </script>
@@ -46,8 +59,10 @@ export default {
         :key="index"
         class="color-list"
         :style="{ backgroundColor: color }"
-      >
-        <div class="color__info">
+        @mouseenter="showColor(color)"
+        @mouseleave="hideColor()"
+        >
+        <div class="color__info" v-show="hoveredColor === color " >
           <span>{{ color }}</span>
 
           <!-- Copy Color to Clipboard -->
@@ -59,6 +74,13 @@ export default {
           </button>
         </div>
       </div>
+
+      <!-- <div
+        v-if="copiedColor"
+        class="toast"
+        >
+        ✓ {{ copiedColor }} copied!
+    </div> -->
 
     </div>
 
@@ -116,15 +138,15 @@ export default {
     cursor: pointer;
     transition: 0.3s ease;
 
-    &:hover {
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-      .color__info {
-        display: flex;
-      }
-    }
+    // &:hover {
+    //   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    //   .color__info {
+    //     display: flex;
+    //   }
+    // }
 
     .color__info {
-      display: none;
+    //   display: none;
       align-items: center;
       gap: 5px;
       padding: 5px;
