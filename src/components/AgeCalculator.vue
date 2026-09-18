@@ -43,7 +43,8 @@
             <h1>Age Calculator</h1>
             <input
                 v-model.number="age"
-                type="number"
+                @input="age = $event.target.value.replace(/\D/g, '')"
+                type="text"
                 placeholder="Enter your age in years"
                 />
                 <div class="age-results" v-if="calculatedAge !== null">

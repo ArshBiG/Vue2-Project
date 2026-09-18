@@ -9,6 +9,9 @@
 // import InputDemo from './components/InputDemo.vue';
 import InputsDemo from './components/InputsDemo.vue';
 
+// import ProfileDemo from './components/profileDemo.vue';
+// import TablesDemo from './components/TablesDemo.vue';
+
 export default {
   components: {
     // MiniProject,
@@ -19,6 +22,8 @@ export default {
     // AgeCalculator,
     // InputDemo,
     InputsDemo,
+    // TablesDemo,
+    // ProfileDemo,
   }
 }
 
@@ -73,7 +78,22 @@ export default {
       <InputsDemo/>
     </div>
 
+    <!-- <div>
+      <TablesDemo/>
+    </div> -->
+
+    <!-- <div>
+      <ProfileDemo/>
+    </div> -->
 
 
   </div>
 </template>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Vazirmatn', sans-serif;
+}
+</style>
