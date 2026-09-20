@@ -1,4 +1,6 @@
 <script>
+// import TestServer from './components/testServer.vue';
+
 
 // import MiniProject from './components/miniProject.vue';
 // import QueueCounter from './components/QueueCounter.vue';
@@ -24,6 +26,7 @@ export default {
     InputsDemo,
     // TablesDemo,
     // ProfileDemo,
+    // TestServer
   }
 }
 
@@ -84,6 +87,10 @@ export default {
 
     <!-- <div>
       <ProfileDemo/>
+    </div> -->
+
+    <!-- <div>
+      <TestServer/>
     </div> -->
 
 

@@ -1,170 +1,131 @@
 <script>
-import inputMixin from '@/mixins/inputMixin';
-
-export default {
-    mixins:[inputMixin],
-  props: {
-    placeholder: {
-      type: String,
-    },
-
-    value: {
-      type: String,
+export default{
+  props:{
+    customInput:{
+      type:Object,
+      default:() => ({})
     }
   },
 
-  methods: {
-    handlerInput(event) {
-      this.inputValue = event.target.value
-      this.isValid = this.inputValue.length >= 3
-      this.touched = true
-
-      this.$emit('input', this.inputValue)
+  data(){
+    return{
+      input: this.customInput,
+      isValid: false
     }
   },
 
-  watch: {
-    value(newValue) {
-      this.isValid = newValue.length >= 3
-    }
-  },
+  methods:{
+    handleClick(){
+      this.isValid = this.input.value.length >= this.input.minCharacter
+      
+      if(this.isValid){
+        this.$emit('change-value', this.input.value)
+        }
+      },
+  }
 
 }
 </script>
 
 <template>
-  <div class="text-input">
-
-    <label class="text-input__label">
-      {{ label }}
-    </label>
-
-    <div class="text-input__wrapper">
-
-      <!-- User icon -->
-      <i class="fas fa-user text-input__icon"></i>
-
-      <input
-        class="text-input__field"
-        type="text"
-        :placeholder="placeholder"
-        :value="inputValue"
-        @input="handlerInput"
-        :class="{
-          'text-input__field--error': touched && !isValid,
-          'text-input__field--success': touched && isValid
-        }"
-      >
-
-      <!-- Success icon -->
-      <i
-        v-if="touched && isValid"
-        class="fas fa-check text-input__status-icon text-input__status-icon--success"
-      ></i>
-
-      <!-- Error icon -->
-      <i
-        v-else-if="touched && !isValid"
-        class="fas fa-exclamation text-input__status-icon text-input__status-icon--error"
-      ></i>
-
-    </div>
-
-    <!-- Error -->
-    <p
-      v-if="touched && !isValid"
-      class="text-input__message text-input__message--error"
-    >
-      نام کاربری باید حداقل ۳ کاراکتر باشد
-    </p>
-
-    <!-- Success -->
-    <p
-      v-else-if="touched && isValid"
-      class="text-input__message text-input__message--success"
-    >
-      اطلاعات وارد شده معتبر است
-    </p>
+  <div class="conteiner" >
+    
+    <div class="customText" >
+      <label class="customText__label">{{input.label}}</label>
+      <div class="customText__inputsBox">
+        <div class="customText__inputsBox--icon" >
+          <i v-if="isValid"
+          :class="input.successIcon"
+          ></i>
+          <i
+          v-else
+          :class="input.errorIcon"
+          class="customText__inputsBox--errorIcon"
+          ></i>
+        </div>
+        <input
+          class="customText__inputsBox--input"
+          type="text"
+          v-model="input.value"
+          @input="handleClick"
+          >
+          <i
+          class="customText__inputsBox--defaultIcon"
+          :class="input.defaultIcon"
+          ></i>
+      </div>
+    
+      <div class="customText__text" >
+        <div v-if="!isValid" >
+          <div class="customText__inputBox--errorIcon" >
+            <span class="customText__text--errorText">{{ input.errorText }} {{ input.minCharacter }} </span>
+          </div>
+        </div>
+        
+        <div v-else >
+          <span class="customText__text--successText">{{ input.successText }}</span>
+          <div class="customText__Icons--success" >
+          </div>
+        </div>
+      </div>
 
   </div>
+</div>
 </template>
 
-<style lang="scss" scoped>
-$success: #00875a;
-$eror: #e53935;
-
-.text-input {
-  width: 100%;
-  max-width: 400px;
-
-  &__label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-  }
-
-  &__wrapper {
-    position: relative;
-  }
-
-  &__field {
-    width: 100%;
-    height: 42px;
-    padding: 0 40px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-
-    &::placeholder {
-      color: #999;
-    }
-
-    &--error {
-      border-color: $eror;
-    }
-
-    &--success {
-      border-color: $success;
-    }
-  }
-
-  &__icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #999;
-    font-size: 15px;
-  }
-
-  &__status-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 15px;
-    &--error {
-      color: $eror;
-    }
-    &--success {
-      color: $success;
-    }
-  }
-  &__message {
-    margin: 6px 0 0;
-    font-size: 12px;
-    &--error {
-      color: $eror;
-    }
-    &--success {
-      color: $success;
-    }
-  }
+<style lang="scss" scoped >
+.conteiner{
+  display: flex;
+  justify-content: center;
+  height: auto;
 }
 
+.customText{
+  display: flex;
+  flex-direction: column;
+  // border: 5px solid white;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+
+  &__label{
+    margin-bottom: 5px;
+    font-size: small;
+  }
+
+  &__text{
+    margin-top: 5px;
+    font-size: small;
+  }
+
+  &__inputsBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 320px;
+    width: 100%;
+    padding: 5px;
+    border: 2px solid black ;
+    border-radius: 10px ;    
+    
+    &--input{
+      direction: rtl;
+      padding: 5px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+
+    &--defaultIcon{
+      font-size: 17px;
+    }
+
+    &--icon{
+      font-size: 15px;
+    }
+
+  }
+
+}
 </style>

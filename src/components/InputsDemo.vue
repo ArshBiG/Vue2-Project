@@ -1,123 +1,91 @@
 <script>
-import CustomNumberInput from './inputs/CustomNumberInput.vue';
-import CustomTextareaInput from './inputs/CustomTextareaInput.vue';
-import CustomTextInput from './inputs/CustomTextInput.vue';
 import CustomSelect from './inputs/CustomSelect.vue';
-import CustomCheckBox from './inputs/CustomCheckBox.vue';
+import CustomTextInput from './inputs/CustomTextInput.vue';
 
-export default {
+export default{
     data(){
         return{
-            textInput: {
-            label: "نام و نام خانوادگی",
-            placeholder: "نام خود را وارد کنید",
-            name: "",
-            },
-
-            numberInput: {
-                label: "مبلغ تراکنش",
-                value: 0,
-                min:1,
-                max:10,
-            },
-            textareaInput: {
+            customInput:{
+                label:"نام و نام خانوادگی",
                 value:"",
-                label:"یادداشت سفارش",
-                placeholder:"لطفا نشانی را دقیق بنویسید.",
-
+                minCharacter:3,
+                successText:"طلاعات وارد شده معتبر است",
+                errorText:"نام کاربری نامعتبر حداقل :",
+                defaultIcon:"fa-regular fa-user",
+                errorIcon:"fa-regular fa-circle-xmark",
+                successIcon:"fa-solid fa-check",
             },
+
             customSelect:{
-                label:"استان را انتخاب کنیذ",
-                value:"",
+                inSelect:"",
+                label:"استان محل سکونت",
+
+                iconBoxError:"",
+                iconBoxSuccess:"",
+                errorIcon:"",
+                successIcon:"",
+                errorText:"طفا استان محل سکونت خود را انتخاب کنید!",
+                successText:"مرکز توزیع استان فعال و قابل دسترس هست",
+                errorColor:"#ba1a1a",
+                successColor:"#006c49",
 
                 options:[
                     {
-                        text:"تست۱",
-                        value:"test1",
-                        color:"#bbb",
-                        icon:"fas fa-map-marker-alt"
+                        name:"تهران",
+                        icon:"",
+                        color:"black",
+                        key:"tehran"
                     },
                     {
-                        text:"تشت۲",
-                        value:"test2",
-                        color:"#ddd",
-                        icon:"fas fa-map-marker-alt"
+                        name:"نیشابور",
+                        icon:"",
+                        color:"black",
+                        key:"neyshabour"
                     },
                     {
-                        text:"تست۳",
-                        value:"test3",
-                        color:"#fff",
-                        icon:"fas fa-map-marker-alt"
-                    },
+                        name:"اصفهان",
+                        icon:"",
+                        color:"black",
+                        key:"esfahan"
+                    }
                 ]
-            },
-            checkboxInput: {
-                label: 'شرایط و قوانین استفاده را می‌پذیرم',
-                value: false,
-                type: 'checkbox'
-                },
 
-            switchInput: {
-                label: 'احراز هویت دو مرحله‌ای (2FA)',
-                value: false,
-                type: 'switch'
-                }
+            }
+
         }
     },
 
     components:{
         CustomTextInput,
-        CustomNumberInput,
-        CustomTextareaInput,
         CustomSelect,
-        CustomCheckBox,
     },
+
+    methods:{
+        handleChange(newValue){
+            this.customInput.value = newValue
+            console.log('new value:',this.customInput.value)
+        },
+
+        handleselect(option){
+            this.customSelect.inSelect = option
+            console.log("select in :",this.customSelect.inSelect)
+        }
+    }
 }
 
 </script>
 
-
 <template>
     <div>
         <CustomTextInput
-        :label="textInput.label"
-        :placeholder="textInput.placeholder"
-        :value="textInput.name"
-        @input="textInput.name = $event"
-        />
-        <CustomNumberInput
-        :label="numberInput.label"
-        :value="numberInput.value"
-        :min="numberInput.min"
-        :max="numberInput.max"
-        @input="numberInput.value = $event"
-        />
-        <CustomTextareaInput
-        :label="textareaInput.label"
-        :value="textareaInput.value"
-        :placeholder="textareaInput.placeholder"
-        :min-length="10"
-        :max-length="15"
-        @input="textareaInput.value = $event"
-        />
-        <CustomSelect
-        :value="customSelect.value"
-        :label="customSelect.label"
-        :options="customSelect.options"
-        @input="customSelect.value = $event"
-        />
-        <CustomCheckBox
-        :label="checkboxInput.label"
-        :value="checkboxInput.value"
-        :type="checkboxInput.type"
-        @input="checkboxInput.value = $event"
-        />
-        <CustomCheckBox
-        :label="switchInput.label"
-        :value="switchInput.value"
-        :type="switchInput.type"
-        @input="switchInput.value = $event"
+        :customInput="customInput"
+        @change-value="handleChange"
         />
 
+        <CustomSelect
+        :select="customSelect"
+        :options="customSelect.options"
+        @selected="handleselect"
+        />
     </div>
 </template>
