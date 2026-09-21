@@ -29,55 +29,68 @@ export default{
 
 <template>
   <div class="conteiner" >
-    
-    <div class="customText" >
-      <label class="customText__label">{{input.label}}</label>
-      <div class="customText__inputsBox">
-        <div class="customText__inputsBox--icon" >
-          <i v-if="isValid"
-          :class="input.successIcon"
-          ></i>
-          <i
-          v-else
-          :class="input.errorIcon"
-          class="customText__inputsBox--errorIcon"
-          ></i>
+      <div class="customText" >
+        <label class="customText__label"
+        >{{input.label}}</label>
+        <div class="customText__inputsBox">
+          <div class="customText__inputsBox--icon" >
+            <i v-if="isValid"
+            :class="input.successIcon"
+            :style="{color: input.successColor}"
+            ></i>
+            <i
+            v-else
+            :class="input.errorIcon"
+            :style="{color: input.errorColor }"
+            class="customText__inputsBox--errorIcon"
+            ></i>
+          </div>
+
+          <input
+            class="customText__inputsBox--input"
+            type="text"
+            v-model="input.value"
+            @input="handleClick"
+            >
+
+            <i
+            class="customText__inputsBox--defaultIcon"
+            :class="input.defaultIcon"
+            ></i>
         </div>
-        <input
-          class="customText__inputsBox--input"
-          type="text"
-          v-model="input.value"
-          @input="handleClick"
-          >
-          <i
-          class="customText__inputsBox--defaultIcon"
-          :class="input.defaultIcon"
-          ></i>
-      </div>
     
       <div class="customText__text" >
         <div v-if="!isValid" >
-          <div class="customText__inputBox--errorIcon" >
+          <div class="customText__inputBox--errorIcon" 
+          :style="{color: input.errorColor}"
+          >
             <span class="customText__text--errorText">{{ input.errorText }} {{ input.minCharacter }} </span>
           </div>
         </div>
         
         <div v-else >
-          <span class="customText__text--successText">{{ input.successText }}</span>
+          <span class="customText__text--successText"
+          :style="{color: input.successColor}"
+          >{{ input.successText }}</span>
           <div class="customText__Icons--success" >
           </div>
         </div>
       </div>
-
-  </div>
+      
+    </div>
 </div>
 </template>
 
 <style lang="scss" scoped >
 .conteiner{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   height: auto;
+  width: 100%;
+  height: 300px;
 }
 
 .customText{
@@ -87,6 +100,11 @@ export default{
   justify-content: center;
   align-items: flex-end;
   position: relative;
+  background: #f9fbff;
+  width: 340px;
+  padding: 30px 40px;
+  border: 1px solid #fff;
+  border-radius: 10px;
 
   &__label{
     margin-bottom: 5px;
@@ -99,30 +117,39 @@ export default{
   }
 
   &__inputsBox{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 320px;
+    position: relative;
+    max-width: 330px;
     width: 100%;
     padding: 5px;
-    border: 2px solid black ;
-    border-radius: 10px ;    
+    border: 2px solid #000 ;
+    border-radius: 10px ;
     
     &--input{
+      color: #000;
+      max-width: 270px;
+      width: 100%;
       direction: rtl;
       padding: 5px;
+      margin-left: 25px;
       border: none;
       outline: none;
       background-color: transparent;
     }
 
     &--defaultIcon{
+      margin-left: 5px;
+      top: 8px;
+      transform: translateY(25%);
+      position: absolute;
       font-size: 17px;
     }
 
     &--icon{
-      font-size: 15px;
+      margin-right:5px ;
+      transform: translateY(20%);
+      position: absolute;
+      font-size: 17px;
+      transition: all 0.7s;
     }
 
   }

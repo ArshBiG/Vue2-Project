@@ -1,4 +1,5 @@
 <script>
+import CustomCheckBox from './inputs/CustomCheckBox.vue';
 import CustomSelect from './inputs/CustomSelect.vue';
 import CustomTextInput from './inputs/CustomTextInput.vue';
 
@@ -14,6 +15,8 @@ export default{
                 defaultIcon:"fa-regular fa-user",
                 errorIcon:"fa-regular fa-circle-xmark",
                 successIcon:"fa-solid fa-check",
+                successColor:"#006c49",
+                errorColor:"#ba1a1a",
             },
 
             customSelect:{
@@ -50,6 +53,42 @@ export default{
                     }
                 ]
 
+            },
+
+            checkBox:{
+                label:"شرایط و قوانین استفاده را میپذیرم",
+                inCheck:false,
+                type:"checkbox",
+
+                inputSuccessIcon:"fa-regular fa-circle-check",
+                inputErrorIcon:"fa-regular fa-circle-exclamation",
+
+                successText:"مجوز حقوقی توسط کاربر ثبت شد",
+                successTextIcon:"fa-duotone fa-thin fa-thumbs-up",
+                successColor:"#006c49",
+
+                errorText:"فعال سازی این گزینه برای تایید حساب ضروری است",
+                errorTextIcon:"fa-solid fa-exclamation",
+                errorColor:"#ba1a1a",
+            },
+
+            switchBox:{
+                label:"حراز هویت دو مرحله ای (2FA)",
+                inCheck:false,
+                type:"switchbox",
+
+                inputTextError:"احراز هویت دومرحله ای فعال است",
+                inputTextSuccess:"فعال سازی برای ورود های سازمانی الزامی است",
+                inputSuccessIcon:"fa-duotone fa-solid fa-circle-check",
+                inputErrorIcon:"fa-solid fa-circle",
+
+                successText:"حساب کاربری از بالاترین سطح کاربری برخوردار است",
+                successIcon:"fa-light fa-lock-keyhole",
+                successColor:"#006c49",
+
+                errorText:"فعال سازی این گزینه برای تایید حساب الزامی است",
+                errorIcon:"fa-regular fa-lock-keyhole-open",
+                errorColor:"#ba1a1a",
             }
 
         }
@@ -58,6 +97,7 @@ export default{
     components:{
         CustomTextInput,
         CustomSelect,
+        CustomCheckBox,
     },
 
     methods:{
@@ -69,6 +109,11 @@ export default{
         handleselect(option){
             this.customSelect.inSelect = option
             console.log("select in :",this.customSelect.inSelect)
+        },
+
+        handleChecked(check){
+            this.checkBox.inCheck = check
+            console.log("This is inCheck:", this.checkBox.inCheck )
         }
     }
 }
@@ -86,6 +131,16 @@ export default{
         :select="customSelect"
         :options="customSelect.options"
         @selected="handleselect"
+        />
+
+        <!-- <CustomCheckBox
+        :value="checkBox"
+        @checked="handleChecked"
+        /> -->
+
+        <CustomCheckBox
+        :value="switchBox"
+        @checked="handleChecked"
         />
     </div>
 </template>

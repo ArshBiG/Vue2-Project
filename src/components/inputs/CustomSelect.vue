@@ -13,7 +13,7 @@ export default{
 
   data(){
     return{
-      isOpen:false,
+      isOpen:true,
       isValid:false,
       selected: this.select
     }
@@ -29,6 +29,10 @@ export default{
     handleSelect(option){
       this.$emit('selected', option)
       console.log("checkSelect",this.selected.inSelect)
+    },
+
+    handleOpen(){
+      this.isOpen = !this.isOpen
     }
   }
 }
@@ -41,31 +45,43 @@ export default{
       {{ select.label }}
     </label>
 
-    <div
-    class="conteiner__select"
-    v-if="selectedOptions"
-    >
-    {{ selectedOptions.name }}
-    </div>
-    <div v-else > 
-      <span>لطفا یک گزینه رو انتخاب کنید</span>
-    </div>
+      <div
+      @click="handleOpen"
+      class="conteiner__selectSections"
+      >
+        <div
+          class="conteiner__selectSections--input"
+          v-if="selectedOptions"
+          >
+          <span>
+            {{ selectedOptions.name }}
+          </span>
+        </div>
 
-    <div
-    class="conteiner__selectBox"
-    >
-      <span
-      v-for="option in options"
-      :key="option.key"
-      @click="handleSelect(option.key)"
-      >
-      <span
-      >
+        <div v-else class="conteiner__select--label" >
+            <span>لطفا یک گزینه رو انتخاب کنید</span>
+        </div>
+      </div>
+
+
+      <div v-if="isOpen" >
+
+        <div
+        class="conteiner__selectBox"
+        >
+        <span
+        v-for="option in options"
+        :key="option.key"
+        @click="handleSelect(option.key)"
+        >
+        <span
+        >
         {{ option.name }}
-    </span>
-      </span>
-    </div>
-
+        </span>
+            </span>
+        </div>
+      </div>
+        
   </div>
 </template>
 
@@ -75,24 +91,35 @@ export default{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 300px;
+  width: 380px;
   direction: rtl;
 
   label{
     display: flex;
-    align-items: right;
+    justify-content: start;
+    align-items: start;
   }
 
-  &__select{
-    background-color: red;
+  &__selectSections{
+    justify-content: start;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 250px;
+    background-color: aquamarine;
+    font-size: small;
   } 
 
   &__selectBox{
     display: flex;
+    padding: 0 10px 0 10px;
+
     flex-direction: column;
-    width: 100%;
+    width: 250px;
     background-color: aquamarine;
     border-radius: 10px;
+    margin-top: 10px;
 
     span{
       cursor: pointer;
