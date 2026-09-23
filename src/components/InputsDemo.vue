@@ -108,7 +108,6 @@ export default{
 
         handleselect(option){
             this.customSelect.inSelect = option
-            console.log("select in :",this.customSelect.inSelect)
         },
 
         handleChecked(check){
@@ -133,10 +132,10 @@ export default{
         @selected="handleselect"
         />
 
-        <!-- <CustomCheckBox
+        <CustomCheckBox
         :value="checkBox"
         @checked="handleChecked"
-        /> -->
+        />
 
         <CustomCheckBox
         :value="switchBox"

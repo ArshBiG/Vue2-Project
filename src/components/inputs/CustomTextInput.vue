@@ -88,7 +88,6 @@ export default{
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  height: auto;
   width: 100%;
   height: 300px;
 }

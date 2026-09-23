@@ -4,6 +4,7 @@ export default {
     return {
         // Save Generated Colors
         colors: [],
+        savedColor:[],
 
         // Save Hovered Color
         hoveredColor: null
@@ -33,7 +34,15 @@ export default {
 
     hideColor() {
         this.hoveredColor = null
-        }
+        },
+
+    handleSavedColor(color){
+      if(
+        !this.savedColor.includes(color)
+      ){
+        this.savedColor.push(color)
+      }
+    }        
 
   }
 }
@@ -66,22 +75,26 @@ export default {
           <span>{{ color }}</span>
 
           <!-- Copy Color to Clipboard -->
-          <button
-            class="btn__copy"
-            @click="copyColor(color)"
-          >
-            📋
-          </button>
+           <div class="btn__copy" >
+            <button
+              @click="copyColor(color)"
+            >
+              📋
+            </button>
+            <button
+            @click="handleSavedColor(color)"
+            >
+            ✚
+            </button>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- <div
-        v-if="copiedColor"
-        class="toast"
-        >
-        ✓ {{ copiedColor }} copied!
-    </div> -->
-
+    <div class="personal__saveList" >
+      <span>
+        Save in color List : {{ savedColor .length ? savedColor.join(' , ') : "چیزی سیو نشده فعلا"}}
+      </span>
     </div>
 
   </div>
@@ -136,7 +149,7 @@ export default {
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.5s ease;
 
     // &:hover {
     //   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -149,25 +162,43 @@ export default {
     //   display: none;
       align-items: center;
       gap: 5px;
-      padding: 5px;
-      background-color: white;
+      padding: 7px;
+      background-color: #e9e9e9;
       color: black;
       border-radius: 5px;
+      font-size: small;
+      transform: translateY(15px);
+      box-shadow: 1 0 15px rgba(150, 150, 150, 0.15);
     }
 
     .btn__copy {
+      margin-top: 5px;
       padding: 5px;
       font-size: 14px;
       cursor: pointer;
-      background-color: white;
+      background-color: #e9e9e9;
       color: black;
       border: 1px solid #ccc;
       border-radius: 5px;
+
+      button{
+        background: transparent;
+        border: none;
+      }
 
       &:hover {
         background-color: #eeeeee;
       }
     }
+
+  }
+
+  &__saveList{
+    text-align: center;
+    padding: 5px;
+    margin-top: 30px;
+    background-color: #4CAF50;
+    border-radius: 5px;
   }
 }
 
